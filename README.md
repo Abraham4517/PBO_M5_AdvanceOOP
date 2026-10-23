@@ -1,4 +1,4 @@
-# Advance OP
+# Advance OOP
 Studi Kasus : Sistem Pengelolaan Uang Kas Kelas
 
 ## Permasalahan
