@@ -10,18 +10,18 @@ Pada tahap sebelumnya, sistem baru memiliki satu class Siswa yang berdiri sendir
 
 ## Desain Class & Struktur OOP
 Aplikasi ini dirancang menggunakan 6 entitas utama yang saling berelasi:   
-  * BisaDicatat (Interface): Kontrak kemampuan yang mewajibkan setiap objek transaksi menyediakan rincian catatan (getRincianTransaksi()) dan perhitungan dampak saldo (hitungDampakSaldo()).
-  * Siswa (Parent Class): Mengelola data dasar anggota kelas ($nama_siswa, $nis, $jumlah_tunggakan) dengan enkapsulasi protected dan validasi input.
-  * Bendahara (Subclass dari Siswa): Mewakili bendahara kelas yang juga merupakan siswa, dilengkapi atribut periode jabatan dan overriding pada method cek_tunggakan().
-  * TransaksiKas (Abstract Class): Kerangka dasar seluruh transaksi keuangan kelas yang menyimpan ID transaksi, tanggal, dan validasi nominal.
-  * TransaksiMasuk & TransaksiKeluar (Subclass dari TransaksiKas): Mengimplementasikan detail transaksi penyetoran kas oleh siswa (menambah saldo) dan pengeluaran dana kelas (mengurangi saldo).
-  * BukuKas (Composition Class): Wadah buku besar yang menampung kumpulan objek transaksi dan menghitung akumulasi saldo akhir secara otomatis.
+  * **`BisaDicatat` (Interface)** : Kontrak kemampuan yang mewajibkan setiap objek transaksi menyediakan rincian catatan (getRincianTransaksi()) dan perhitungan dampak saldo (hitungDampakSaldo()).
+  * **`Siswa` (Parent Class)** : Mengelola data dasar anggota kelas ($nama_siswa, $nis, $jumlah_tunggakan) dengan enkapsulasi protected dan validasi input.
+  * **`Bendahara` (Subclass dari `Siswa`)** : Mewakili bendahara kelas yang juga merupakan siswa, dilengkapi atribut periode jabatan dan overriding pada method cek_tunggakan().
+  * **`TransaksiKas` (Abstract Class)** : Kerangka dasar seluruh transaksi keuangan kelas yang menyimpan ID transaksi, tanggal, dan validasi nominal.
+  * **`TransaksiMasuk` & `TransaksiKeluar` (Subclass dari `TransaksiKas`)** : Mengimplementasikan detail transaksi penyetoran kas oleh siswa (menambah saldo) dan pengeluaran dana kelas (mengurangi saldo).
+  * **`BukuKas` (Composition Class)** : Wadah buku besar yang menampung kumpulan objek transaksi dan menghitung akumulasi saldo akhir secara otomatis.
 
 ## Alasan Pemilihan Relasi
-  * Inheritance ("is-a"): Digunakan pada Bendahara extends Siswa karena secara nyata bendahara kelas adalah seorang siswa di kelas tersebut yang juga wajib membayar kas, serta pada TransaksiMasuk dan TransaksiKeluar yang merupakan jenis spesifik dari TransaksiKas.
-  *   Abstract Class & Interface ("can-do"): TransaksiKas dijadikan abstract class karena tidak boleh ada objek "transaksi abstrak" yang berdiri sendiri tanpa kejelasan apakah uang tersebut masuk atau keluar. Interface BisaDicatat memastikan BukuKas hanya bergantung pada kontrak kemampuan pencatatan, bukan pada detail class konkret.
-  *   Composition ("has-a"): Digunakan pada BukuKas yang menyimpan array objek TransaksiKas. Relasi ini dipilih karena BukuKas memiliki banyak catatan transaksi (has-a), bukan merupakan jenis dari transaksi.
-  *   Overriding & Polymorphism: Method hitungDampakSaldo() di-override agar menghasilkan nilai positif pada TransaksiMasuk dan negatif pada TransaksiKeluar. Hal ini memungkinkan BukuKas menerapkan polymorphism saat menjumlahkan saldo dan mencetak riwayat transaksi melalui perulangan foreach secara bersih tanpa memerlukan percabangan if/else. 
+  * **Inheritance ("is-a")** : Digunakan pada Bendahara extends Siswa karena secara nyata bendahara kelas adalah seorang siswa di kelas tersebut yang juga wajib membayar kas, serta pada TransaksiMasuk dan TransaksiKeluar yang merupakan jenis spesifik dari TransaksiKas.
+  *   **Abstract Class & Interface ("can-do")** : TransaksiKas dijadikan abstract class karena tidak boleh ada objek "transaksi abstrak" yang berdiri sendiri tanpa kejelasan apakah uang tersebut masuk atau keluar. Interface BisaDicatat memastikan BukuKas hanya bergantung pada kontrak kemampuan pencatatan, bukan pada detail class konkret.
+  *   **Composition ("has-a")** : Digunakan pada BukuKas yang menyimpan array objek TransaksiKas. Relasi ini dipilih karena BukuKas memiliki banyak catatan transaksi (has-a), bukan merupakan jenis dari transaksi.
+  *   **Overriding & Polymorphism** : Method hitungDampakSaldo() di-override agar menghasilkan nilai positif pada TransaksiMasuk dan negatif pada TransaksiKeluar. Hal ini memungkinkan BukuKas menerapkan polymorphism saat menjumlahkan saldo dan mencetak riwayat transaksi melalui perulangan foreach secara bersih tanpa memerlukan percabangan if/else. 
 
 
 ## Requirements
